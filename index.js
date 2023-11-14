@@ -1,3 +1,4 @@
+// function that writes data to the table from localStorage
 function populateTable() {
     const tableData = JSON.parse(localStorage.getItem("details")) || [];
     let table = document.getElementById('table');
@@ -9,8 +10,9 @@ function populateTable() {
           <td class="py-2 px-4 text-center">${element.password}</td>
           <td class="py-2 px-4 text-center">${element.dob}</td>
           <td class="py-2 px-4 text-center">true</td>
-        </tr>`;
+      </tr>`;
     });
+    
     table.innerHTML = `
     <tr class="border-2 border-stone-200 bg-stone-400">
       <th >Name</th>
@@ -19,11 +21,10 @@ function populateTable() {
       <th>Dob</th>
       <th>Accepted terms?</th>
       </tr>
-    ${tableContent}
-    `;
-
+    ${tableContent}`;
   }
 
+  // Function that is called when form is submitted
   function submit() {
     const user = {
       name: document.getElementById("name").value,
@@ -38,6 +39,7 @@ function populateTable() {
     localStorage.setItem("details", JSON.stringify(data));
     
   }
+
   // Set min and max dates
   var today = new Date();
   var maxDate = new Date(today);
@@ -52,5 +54,7 @@ function populateTable() {
     .getElementById("dob")
     .setAttribute("min", minDate.toISOString().slice(0, 10));
   document.getElementById("form").addEventListener("submit", submit);
+
+  // populateTable function call that adds all data in localStorage
   populateTable();
   
